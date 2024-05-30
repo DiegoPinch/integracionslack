@@ -25,7 +25,14 @@ jobs:
     - name: Run tests
       run: npm test
 
-    - name: Deploy to Vercel
-      run: vercel --prod
+    - name: Check if pull request is merged
+      if: github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
+      run: |
+        # Fusiona la rama de características en la rama principal
+        git merge --no-ff ${{ github.event.pull_request.head.ref }}
+        # Sube los cambios a GitHub
+        git push origin main
+        # Despliega en Vercel
+        vercel --prod
       env:
         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
