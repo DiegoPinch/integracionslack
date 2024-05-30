@@ -1,43 +1,529 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Web</title>
-    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/historial.css">
+    <script src="js/estrellas.js"></script>
+    <link rel="stylesheet" href="fonts/css/all.min.css"></link>
+    <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Historial</title>
 </head>
 <body>
+  
+    <div class="contenedor">
+    
     <header>
-        <h1>Bienvenido a Mi Página Web</h1>
-        <nav>
-            <ul>
-                <li><a href="#">Inicio</a></li>
-                <li><a href="#">Sobre Mí</a></li>
-                <li><a href="#">Proyectos</a></li>
-                <li><a href="#">Contacto</a></li>
-            </ul>
-        </nav>
+      
+      <span class="texto">Reserva Restaurantes</span>
+      <div class="logo">
+        <a href="principal.html">
+        <i class="fa-solid fa-utensils"></i>
+        </a>
+      </div>
+      <br><br>
+      <nav>
+        <ul>
+          <li><a href="principal.html">Buscar <i class="fa-solid fa-magnifying-glass"> </i></a></li>
+          <li><a href="favoritos.html">Favoritos <i class="fas fa-heart"></i></a></li>
+          <li><a href="historial.html">Historial <i class="fa-regular fa-clock"> </i></a></li>
+          <li><a href="perfil.html">Mi Perfil <i class="fa-solid fa-user"></i></a></li>
+        </ul>
+        <div class="salir">
+          <a href="index.html"><i class="fa-solid fa-circle-xmark"></i></a>
+      </div>
+      </nav>
     </header>
-    <main>
-        <section>
-            <h2>Sobre Mí</h2>
-            <p>¡Hola! Soy un desarrollador web apasionado por crear sitios web modernos y funcionales.</p>
-        </section>
-        <section>
-            <h2>Proyectos</h2>
-            <p>Aquí encontrarás algunos de mis proyectos recientes.</p>
-        </section>
+    
+
+    <div class="cantidades">
+      <div class="imgusuario"></div>
+        <div class="linea1"></div>
+        <span class="nlugarVisita1">1                             1</span>
+        <span class="nlugarVisita2">3                             3</span>
+        <span class="nlugarVisita3">5                             5</span>
+        <span class="nlugarVisita4">8                             6</span>
+        <span class="nlugarVisita5">2                             2</span>
+        <span class="nlugarVisita6">10                            6 </span>
+        <span class="tlugarVisita"> Visitas                         Lugares</span>
+    </div>
+    <script>
+      var lvhoy = document.querySelector('.nlugarVisita1');
+      var lvsemana = document.querySelector('.nlugarVisita2');
+      var lvmes = document.querySelector('.nlugarVisita3');
+      var lvanio = document.querySelector('.nlugarVisita4');
+      var lvhace = document.querySelector('.nlugarVisita5');
+      lvhoy.style.display = 'none';
+      lvsemana.style.display = 'none';
+      lvmes.style.display = 'none';
+      lvanio.style.display = 'none';
+      lvhace.style.display = 'none';
+    </script>
+
+    <main class="contenido">
+        <p>
+            <label for="seleccion">Fecha: </label>
+            <select id="seleccion" name="seleccion" onchange="mostrarWidgetsSeleccionados(this.value)">
+                <option value="hoy">Hoy</option>
+                <option value="esta_semana">Esta Semana</option>
+                <option value="este_mes">Este Mes</option>
+                <option value="este_anio">Este Año</option>
+                <option value="todos" selected>Todos</option>
+            </select>
+        </p>
+        <br><br>
     </main>
-    <div>
-        <p>Contenido de la pagina</p>
-        <h2>descripcion general</h2>
-        <h2>La pagina consiste en una descripcion personal del usuario</h2>
+    
+    
+    <div class="restaurant-1">
+        <span class="restaurante">Pizzería La Cigarra</span>
+        <span class="direccion">Ambato</span>
+        <div id="miBoton1" onclick="abrirPantallaFlotante(1)"><span class="tcalificar">Calificar</span></div>
+        <span id="cEstrellas1"></span>
+        <button class="corazon" id="corazon1" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+        <div id="pantallaFlotante1">
+          <div id="estrellas1" onmouseover="aplicarHoverAnteriores(event, 1)" onclick="calificar(event, 1)">
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+            <span class="estrella">&#9733;</span>
+          </div>
+        </div>
+        <span class="fechaHora">Fecha: 20/07/2023       Hora: 2 p.m.</span>      
+        <div class="imgrestaurante1"></div>
+        
+        <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Pizzería La Cigarra"></div>
 
-
+        <!-- Ventana emergente resenia -->
+        <div id="modal" class="modal">
+            <div class="modal-contenido">
+            <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+            <h2 id="encabezado-resena"></h2>
+            <br>
+            <textarea id="texto-resena"></textarea>
+              <br><br>
+            <button class="publicar" onclick="guardarResena()">Publicar</button>
+            <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+        </div>
+    </div>
 
     </div>
-    <footer>
-        <p>&copy; 2024 DAS. Todos los derechos reservados.</p>
-    </footer>
+
+    <div class="restaurant-2">
+      <span class="restaurante">Panda Sushi Rolls</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton2" onclick="abrirPantallaFlotante(2)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas2"></span>
+      <button class="corazon" id="corazon2" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante2">
+        <div id="estrellas2" onmouseover="aplicarHoverAnteriores(event, 2)" onclick="calificar(event, 2)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 19/07/2023     Hora: 10 p.m.</span>      
+      <div class="imgrestaurante2"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Panda Sushi Rolls"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+    </div>
+    <div class="restaurant-3">
+      <span class="restaurante">Doña Paty</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton3" onclick="abrirPantallaFlotante(3)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas3"></span>
+      <button class="corazon" id="corazon3" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante3">
+        <div id="estrellas3" onmouseover="aplicarHoverAnteriores(event, 3)" onclick="calificar(event, 3)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 18/07/2023       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante3"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Doña Paty"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+    </div>
+    <div class="restaurant-4">
+      <span class="restaurante">Pollos D' Campo</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton4" onclick="abrirPantallaFlotante(4)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas4"></span>
+      <button class="corazon" id="corazon4" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante4">
+        <div id="estrellas4" onmouseover="aplicarHoverAnteriores(event, 4)" onclick="calificar(event, 4)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 09/07/2023       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante4"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Pollos D' Campo"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+    </div>
+    <div class="restaurant-5">
+      <span class="restaurante">May Flower</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton5" onclick="abrirPantallaFlotante(5)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas5"></span>
+      <button class="corazon" id="corazon5" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante5">
+        <div id="estrellas5" onmouseover="aplicarHoverAnteriores(event, 5)" onclick="calificar(event, 5)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 08/07/2023       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante5"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="May Flower"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+
+    </div>
+    <div class="restaurant-6">
+      <span class="restaurante">Ali's Grill</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton6" onclick="abrirPantallaFlotante(6)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas6"></span>
+      <button class="corazon" id="corazon6" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante6">
+        <div id="estrellas6" onmouseover="aplicarHoverAnteriores(event, 6)" onclick="calificar(event, 6)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 01/06/2023       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante6"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Ali's Grill"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+
+    </div>
+    <div class="restaurant-7">
+      <span class="restaurante">Pollos D' Campo</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton7" onclick="abrirPantallaFlotante(7)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas7"></span>
+      <button class="corazon" id="corazon7" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante7">
+        <div id="estrellas7" onmouseover="aplicarHoverAnteriores(event, 7)" onclick="calificar(event, 7)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 28/05/2023       Hora: 8 p.m.</span>      
+      <div class="imgrestaurante7"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Pollos D' Campo"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+
+    </div>
+    <div class="restaurant-8">
+      <span class="restaurante">Pizzería La Cigarra</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton8" onclick="abrirPantallaFlotante(8)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas8"></span>
+      <button class="corazon" id="corazon8" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante8">
+        <div id="estrellas8" onmouseover="aplicarHoverAnteriores(event, 8)" onclick="calificar(event, 8)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 20/05/2023       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante8"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Pizzería La Cigarra"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+
+    </div>
+    <div class="restaurant-9">
+      <span class="restaurante">Panda Sushi Rolls</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton9" onclick="abrirPantallaFlotante(9)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas9"></span>
+      <button class="corazon" id="corazon9" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante9">
+        <div id="estrellas9" onmouseover="aplicarHoverAnteriores(event,9)" onclick="calificar(event,9)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 30/12/2022       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante9"></div>
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Panda Sushi Rolls"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+    </div>
+    </div>
+    <div class="restaurant-10">
+      <span class="restaurante">Doña Paty</span>
+      <span class="direccion">Ambato</span>
+      <div id="miBoton10" onclick="abrirPantallaFlotante(10)"><span class="tcalificar">Calificar</span></div>
+      <span id="cEstrellas10"></span>
+      <button class="corazon" id="corazon10" onclick="cambiarColor(this)"><i class="fas fa-heart"></i></button>
+      <div id="pantallaFlotante10">
+        <div id="estrellas10" onmouseover="aplicarHoverAnteriores(event, 10)" onclick="calificar(event, 10)">
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+          <span class="estrella">&#9733;</span>
+        </div>
+      </div>
+      <span class="fechaHora">Fecha: 29/12/2022       Hora: 2 p.m.</span>      
+      <div class="imgrestaurante10"></div>   
+      
+      <div class="resenia" onclick="mostrarPantallaFlotante(this)" data-encabezado="Doña Paty"></div>
+
+      <!-- Ventana emergente resenia -->
+      <div id="modal" class="modal">
+        <div class="modal-contenido">
+        <span class="cerrar" onclick="cerrarPantallaFlotante()">&times;</span>
+        <h2 id="encabezado-resena"></h2>
+        <br>
+        <textarea id="texto-resena"></textarea>
+          <br><br>
+        <button class="publicar" onclick="guardarResena()">Publicar</button>
+        <button class="cancelar" onclick="cerrarPantallaFlotante()">Cancelar</button>
+    </div>
+</div>
+  </div>
+  <footer class="footer">    
+    <div class="container-footer-all">
+         <div class="container-body">
+             <div class="columna">
+                 <h1>Información de la aplicación</h1>
+                 <p>La aplicación ofrece a los usuarios una plataforma desde la cual pueden
+                  explorar los diferentes restaurantes disponibles y reservar una mesa en tiempo real. Los usuarios pueden seleccionar la fecha, hora y número de comensales de la
+                  mesa deseada, además permitirá ver información detallada sobre cada restaurante, menús, horarios de atención y ubicación.</p>
+             </div>
+             <div class="columna">
+                 <h1>Redes Sociales</h1>
+                 <div class="row">
+                     <img src="icon/facebook.png">
+                     <label>Siguenos en Facebook</label>
+                 </div>
+                 <div class="row">
+                     <img src="icon/twitter.png">
+                     <label>Siguenos en Twitter</label>
+                 </div>
+                 <div class="row">
+                     <img src="icon/instagram.png">
+                     <label>Siguenos en Instagram</label>
+                 </div>
+             </div>
+             <div class="columna">
+                 <h1>Contactos</h1>
+                 <div class="row2">
+                     <img src="icon/house.png">
+                     <label>Universidad Técnica de Ambato</label>
+                 </div>
+                 <div class="row2">
+                     <img src="icon/smartphone.png">
+                     <label>0981315272</label>
+                 </div>
+
+                 <div class="row2">
+                     <img src="icon/contact.png">
+                      <label>eflores9091@uta.edu.ec</label>
+                 </div>
+
+             </div>
+
+         </div>
+     
+     </div>
+     
+     <div class="container-footer">
+            <div class="derechos">
+                 <div class="copyright">
+                     @2023 Todos los Derechos Reservados | <a href="">Quinto Software</a>
+                 </div>
+
+                 <div class="information">
+                     <a href="favoritos.html">Información</a> | <a href="favoritos.html">Privacion y Politica</a> | <a href="favoritos.html">Terminos y Condiciones</a>
+                 </div>
+             </div>
+
+         </div>
+     
+ </footer>
+  </div>
+    
 </body>
 </html>
